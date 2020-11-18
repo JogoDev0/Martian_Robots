@@ -1,9 +1,28 @@
+const fs = require('fs');
+const os = require('os');
 const INPUT_DATA = `${__dirname}/input/input.txt`;
 const OUTPUT_DATA = `${__dirname}/output/output.txt`;
 const ORIENTATION = ['N', 'E', 'S', 'W'];
 const INSTRUCTIONS = ['F', 'L', 'R'];
 const MAX_COORDINATE = 50;
 const MAX_INSTRUCTIONS = 100;
+
+const checkInputdata = (from, data) => {
+    let inputData = '';
+    if (data === '') {
+        try {
+            inputData = fs.readFileSync(INPUT_DATA, 'utf8').split(os.EOL);
+        } catch (err) {
+            throw new Error(`ERROR: Can not open input file ${INPUT_DATA}`);
+        }
+    } else {
+        inputData = data.split(/\r\n|\r|\n/);
+    }
+    if (inputData.length < 3) {
+        throw new Error(`ERROR: Incorrect input data. Please correct data and try again`);
+    }
+    return inputData;
+}
 
 const correctMarsValues = (values) => {
     if (values.length != 2) {
@@ -37,9 +56,8 @@ const correctRobotPosition = (line, mars) => {
 }
 const correctRobotInstructions = (line) => {
 
-    line = line.replace(/ /g, '').toUpperCase().split('');
-
-    for (const move of line) {
+    moves = line.split('');
+    for (const move of moves) {
         if (INSTRUCTIONS.indexOf(move) === -1) {
             return false;
         }
@@ -68,6 +86,12 @@ const calculateNextPosition = (robot) => {
     return { cordX, cordY };
 }
 
+const writeData = (data) => {
+    const writeStream = fs.createWriteStream(OUTPUT_DATA);
+    writeStream.write(data);
+    writeStream.end();
+}
+
 module.exports = {
     INPUT_DATA,
     OUTPUT_DATA,
@@ -75,8 +99,10 @@ module.exports = {
     INSTRUCTIONS,
     MAX_COORDINATE,
     MAX_INSTRUCTIONS,
+    checkInputdata,
     correctMarsValues,
     correctRobotPosition,
     correctRobotInstructions,
-    calculateNextPosition
+    calculateNextPosition,
+    writeData
 }
