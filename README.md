@@ -5,16 +5,22 @@ Martian Robots
 #### Running Instructions
 
 A) CLI version
-npm install
+
+> npm install
 - npm run start -> Runs web version of the application. Open http://localhost:3000 and follow instructions.
 - npm run local -> Runs local version of the application. It will get data from /input/input.txt file and  out put the result on /output/output.txt file and CLI.
 - npm run test -> Runs test cases.
 
 B) Docker version
-docker build -t martianrobots . -> To build docker image.
+
+> docker build -t martianrobots . -> To build docker image.
 - docker run --init -p 3000:3000 -d martianrobots -> Runs web version of the application. Open http://localhost:3000 and follow instructions.
 - docker run --init -it martianrobots npm run local -> Runs local version of the application. It will get data from /input/input.txt file and  out put the result on /output/output.txt file and CLI.
 - docker run --init -it martianrobots npm run test -> Runs test cases.
+
+C) Heroku version
+
+> Open https://martian--robots.herokuapp.com/ and follow instructions.
 
 
 #### The problem
@@ -29,10 +35,9 @@ by y-coordinate) and an orientation (N, S, E, W for north, south, east, and west
 instruction is a string of the letters "L", "R", and "F" which represent, respectively, the
 instructions:
 
-● Left: the robot turns left 90 degrees and remains on the current grid point.
-● Right: the robot turns right 90 degrees and remains on the current grid point.
-● Forward: the robot moves forward one grid point in the direction of the current
-orientation and maintains the same orientation.
+● Left: the robot turns left 90 degrees and remains on the current grid point.<br />
+● Right: the robot turns right 90 degrees and remains on the current grid point.<br />
+● Forward: the robot moves forward one grid point in the direction of the current orientation and maintains the same orientation.<br />
 
 The direction North corresponds to the direction from grid point (x, y) to grid point (x,
 y+1).
@@ -46,6 +51,7 @@ that prohibits future robots from dropping off the world at the same grid point.
 is left at the last grid position the robot occupied before disappearing over the edge. An
 instruction to move "off" the world from a grid point from which a robot has been
 previously lost is simply ignored by the current robot.
+
 
 #### The Input
 
@@ -64,6 +70,7 @@ The maximum value for any coordinate is 50.
 
 All instruction strings will be less than 100 characters in length.
 
+
 ### The output
 
 For each robot position/instruction in the input, the output should indicate the final grid
@@ -72,16 +79,16 @@ position and orientation of the robot. If a robot falls off the edge of the grid
 
 Sample input
 
-5 3
-1 1 E
-RFRFRFRF
-3 2 N
-FRRFLLFFRRFLL
-0 3 W
-LLFFFLFLFL
+5 3<br />
+1 1 E<br />
+RFRFRFRF<br />
+3 2 N<br />
+FRRFLLFFRRFLL<br />
+0 3 W<br />
+LLFFFLFLFL<br />
 
 Sample output
 
-1 1 E
-3 3 N LOST
-2 3 S
+1 1 E<br />
+3 3 N LOST<br />
+2 3 S<br />
