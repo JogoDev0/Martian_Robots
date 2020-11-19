@@ -1,4 +1,3 @@
-const { TestScheduler } = require('jest');
 const main = require('../index');
 
 describe('Index tests', () => {

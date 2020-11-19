@@ -27,11 +27,6 @@ describe('Mars tests', () => {
     test('Should move the robot. In case robot get lost, should add LOST to state and add the position as scented. Any other robot robot should not be able to get lost from scented positions', () => {
         mars.moveRobot(robot);
         expect(robot.getState()).toBe('3 3 N LOST');
-        expect(mars.getScents()).toEqual([
-            {
-                cordX: 3,
-                cordY: 3
-            }])
         expect(mars.positionScented({ cordX: 3, cordY: 3 })).toBe(true);
         expect(mars.getScents()).toEqual([{ cordX: 3, cordY: 3 }]);
         expect(robot.getLost()).toBe(true);
@@ -41,7 +36,7 @@ describe('Mars tests', () => {
         expect(robot1.getState()).toBe('3 3 N');
     })
 
-    test('Should face towards the correct direction', () => {
+    test('Robot should face towards the correct direction', () => {
         expect(mars.robotTurn('N', 'R')).toBe('E');
         expect(mars.robotTurn('E', 'R')).toBe('S');
         expect(mars.robotTurn('S', 'R')).toBe('W');

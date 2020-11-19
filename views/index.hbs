@@ -1,0 +1,30 @@
+<h1>Martian Robots</h1>
+<h3>Instructions:</h3>
+<p>Insert input data below and clik on the submit button</p>
+<p>The first line of input is the upper-right coordinates of the rectangular world, the
+    lower-left coordinates are assumed to be 0, 0.</p>
+<p> The remaining input consists of a sequence of robot positions and instructions (two lines
+    per robot). A position consists of two integers specifying the initial coordinates of the
+    robot and an orientation (N, S, E, W), all separated by whitespace on one line. A robot
+    instruction is a string of the letters "L", "R", and "F" on one line.</p>
+<p>The maximum value for any coordinate is 50.</p>
+<p>All instruction strings will be less than 100 characters in length.</p>
+<p>Example input:</p>
+<pre>
+5 3
+1 1 E
+RFRFRFRF
+3 2 N
+FRRFLLFFRRFLL
+0 3 W
+LLFFFLFLFL
+</pre>
+<form action="/" method="POST">
+    <div class="form-group">
+        <label for="textArea">
+            <h3> Input data:</h3>
+        </label>
+        <textarea class="form-control" id="textArea" name="inputData" rows="10"></textarea>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-outline-danger">
+</form>

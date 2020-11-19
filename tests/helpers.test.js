@@ -16,9 +16,7 @@ describe('Helpers tests', () => {
         const case1 = checkInputdata('TEST', '5 3\n1 1 E\nRFRFRFRF\n3 2 N\nFRRFLLFFRRFLL\n0 3 W\nLLFFFLFLFL');
         expect(case1).toEqual(["5 3", "1 1 E", "RFRFRFRF", "3 2 N", "FRRFLLFFRRFLL", "0 3 W", "LLFFFLFLFL"]);
 
-        expect(() => {
-            checkInputdata('TEST', '7 5');
-        }).toThrow('ERROR: Incorrect input data. Please correct data and try again');
+        expect(checkInputdata('TEST', '7 5')).toBe('ERROR: Incorrect input data. Please correct data and try again');
     })
 
     test('Should check Mars correct values', () => {

@@ -1,5 +1,4 @@
 const fs = require('fs');
-const os = require('os');
 const INPUT_DATA = `${__dirname}/input/input.txt`;
 const OUTPUT_DATA = `${__dirname}/output/output.txt`;
 const ORIENTATION = ['N', 'E', 'S', 'W'];
@@ -7,23 +6,30 @@ const INSTRUCTIONS = ['F', 'L', 'R'];
 const MAX_COORDINATE = 50;
 const MAX_INSTRUCTIONS = 100;
 
+//Function to check if input data has corerct values to run the application.
 const checkInputdata = (from, data) => {
+
     let inputData = '';
-    if (data === '') {
+    data = data.trim();
+    //If we get a LOCAL call and pass no data, we try to read data from /input/input.txt file. If we can´t an error message is returned.
+    if (data === '' && from === 'LOCAL') {
         try {
-            inputData = fs.readFileSync(INPUT_DATA, 'utf8').split(os.EOL);
+            inputData = fs.readFileSync(INPUT_DATA, 'utf8').split(/\r\n|\r|\n/);
         } catch (err) {
-            throw new Error(`ERROR: Can not open input file ${INPUT_DATA}`);
+            return `ERROR: Can not open input file ${INPUT_DATA}`
         }
+        //If we get another kind of call (WEB or TEST), we try to split the data in lines.
     } else {
         inputData = data.split(/\r\n|\r|\n/);
     }
+    //If we get less than 3 lines of data (the minimun for Mars and a robot creation), an error message is returned.
     if (inputData.length < 3) {
-        throw new Error(`ERROR: Incorrect input data. Please correct data and try again`);
+        return `ERROR: Incorrect input data. Please correct data and try again`
     }
     return inputData;
 }
 
+//Check if data is correct for Mars creation. Data is correct if we get two integers between 0 and 50.
 const correctMarsValues = (values) => {
     if (values.length != 2) {
         return false;
@@ -36,6 +42,7 @@ const correctMarsValues = (values) => {
     return true;
 }
 
+//Check if data is correct for positioning a robot. Data is correct if we get two integers, between o and Mars width and height respectively, and a correct orientation (N, E, S or W).
 const correctRobotPosition = (line, mars) => {
 
     line = line.split('');
@@ -54,6 +61,8 @@ const correctRobotPosition = (line, mars) => {
     }
     return true;
 }
+
+//Check if moving robot instructions are correct. They are correct if are L, R or F.
 const correctRobotInstructions = (line) => {
 
     moves = line.split('');
@@ -65,6 +74,7 @@ const correctRobotInstructions = (line) => {
     return true;
 }
 
+//Function to calculate next robot position. According to the position the robot is facing, when the robot advance, one has to be added or subtracted to one of the robots coordinates.
 const calculateNextPosition = (robot) => {
     const facing = robot.getDirection();
     let cordX = robot.getCordX();
@@ -86,6 +96,7 @@ const calculateNextPosition = (robot) => {
     return { cordX, cordY };
 }
 
+//Function to write output data to the file /output/output.txt
 const writeData = (data) => {
     const writeStream = fs.createWriteStream(OUTPUT_DATA);
     writeStream.write(data);
