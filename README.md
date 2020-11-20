@@ -4,19 +4,28 @@ Martian Robots
 
 #### Running Instructions
 
+
 A) CLI version
 
 > npm install
+
 - npm run start -> Runs web version of the application. Open http://localhost:3000 and follow instructions.
+
 - npm run local -> Runs local version of the application. It will get data from /input/input.txt file and  out put the result on /output/output.txt file and CLI.
+
 - npm run test -> Runs test cases.
+
 
 B) Docker version
 
-> docker build -t martianrobots . -> To build docker image.
-- docker run --init -p 3000:3000 -d martianrobots -> Runs web version of the application. Open http://localhost:3000 and follow instructions.
-- docker run --init -it martianrobots npm run local -> Runs local version of the application. It will get data from /input/input.txt file and  out put the result on /output/output.txt file and CLI.
-- docker run --init -it martianrobots npm run test -> Runs test cases.
+> Build docker image: "docker build -t pistachu/martian_robots:latest ." or pull image from dockerhub: "docker pull pistachu/martian_robots:latest" 
+
+- docker run --init -p 3000:3000 pistachu/martian_robots:latest -> Runs web version of the application. Open http://localhost:3000 and follow instructions.
+
+- docker run --init -it pistachu/martian_robots:latest npm run local -> Runs local version of the application. It will get data from /input/input.txt file and  out put the result on /output/output.txt file and CLI.
+
+- docker run --init -it pistachu/martian_robots:latest npm run test -> Runs test cases.
+
 
 C) Heroku version
 
